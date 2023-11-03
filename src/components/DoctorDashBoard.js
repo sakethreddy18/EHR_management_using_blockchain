@@ -12,12 +12,17 @@ const DoctorDashBoardPage = () => {
     navigate("/doctor/" + address + "/viewrec");
   };
 
+  const viewAppointment = () => {
+    navigate("/doctor/" + address + "/viewapp");
+  };
+
   return (
     <div className="DoctorDashBoard">
       <h2>Doctor Dashboard</h2>
       <p>Hello, doctor at address: {address}</p>
       <button onClick={handleClick}>Create EHR</button>
       <button onClick={viewPatientRecords}>View Patient Records</button>
+      <button onClick={viewAppointment}>View Appointments</button>
     </div>
   );
 };

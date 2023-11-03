@@ -26,7 +26,8 @@ import InsurerViewRecords from "./components/InsurerViewRecords";
 import ContractInteractionDoctor from "./components/ContractInteractionDoctor";
 import PaymentPortal from "./components/PaymentPortal";
 import PatientViewClaims from "./components/PatientViewClaims";
-
+import BookAppointment from "./components/BookAppointment";
+import ViewAppointment from "./components/ViewAppointment";
 const BrowseRouter = () => {
   const [web3, setWeb3] = useState(null);
   const [contract, setContract] = useState(null);
@@ -103,9 +104,18 @@ const BrowseRouter = () => {
           element={<RecordPermission />}
         ></Route>
         <Route
+          path="/patient/:address/bookappointment"
+          element={<BookAppointment></BookAppointment>}
+        ></Route>
+        <Route
           path="/doctor/:address/viewrec"
           element={<DoctorPermission />}
         ></Route>
+        <Route
+          path="/doctor/:address/viewapp"
+          element={<ViewAppointment />}
+        ></Route>
+
         <Route
           path="/doctor/:address/viewrec/:patientaddress"
           element={<ContractInteractionDoctor />}

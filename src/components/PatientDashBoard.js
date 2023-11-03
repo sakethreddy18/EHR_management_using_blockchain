@@ -24,6 +24,10 @@ const PatientDashBoard = () => {
     navigate("/patient/" + address + "/viewclaim");
   };
 
+  const bookAppointment = () => {
+    navigate("/patient/" + address + "/bookappointment");
+  };
+
   return (
     <div className="patientdashboard">
       <h2>Patient Dashboard</h2>
@@ -34,6 +38,7 @@ const PatientDashBoard = () => {
       <button onClick={writepermission}>Write Permission</button>
       <button onClick={insuranceclaim}>Insurance Claim</button>
       <button onClick={viewInsuranceClaim}> View Claims</button>
+      <button onClick={bookAppointment}> Book Appointment</button>
     </div>
   );
 };
