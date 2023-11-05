@@ -120,6 +120,12 @@ const PatientRegistration = () => {
           gender
         )
         .send({ from: walletAddress });
+      setName("");
+      setHomeAddress("");
+      setDateOfBirth("");
+      setPhoneNumber("");
+      setWalletAddress("");
+      setGender("");
     } catch (error) {
       console.error("Error registering patient:", error);
     } finally {

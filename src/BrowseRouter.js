@@ -28,6 +28,8 @@ import PaymentPortal from "./components/PaymentPortal";
 import PatientViewClaims from "./components/PatientViewClaims";
 import BookAppointment from "./components/BookAppointment";
 import ViewAppointment from "./components/ViewAppointment";
+import Footer from "./components/Footer";
+
 const BrowseRouter = () => {
   const [web3, setWeb3] = useState(null);
   const [contract, setContract] = useState(null);
@@ -57,6 +59,7 @@ const BrowseRouter = () => {
   return (
     <BrowserRouter>
       <NavBar></NavBar>
+
       <Routes>
         <Route path="/" element={<LandingPage></LandingPage>}></Route>
         <Route
@@ -151,6 +154,7 @@ const BrowseRouter = () => {
           element={<InsurerViewRecords></InsurerViewRecords>}
         ></Route>
       </Routes>
+      <Footer></Footer>
     </BrowserRouter>
   );
 };

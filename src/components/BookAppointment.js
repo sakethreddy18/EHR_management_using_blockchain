@@ -101,46 +101,68 @@ function BookAppointment() {
   };
 
   return (
-    <div className="bookappointment">
-      <h1>Book Appointment</h1>
+    <div className="bg-gradient-to-b from-black to-gray-800 p-4 sm:p-10 font-mono text-white flex flex-col justify-center items-center">
+      <div className="w-full max-w-6xl bg-gray-900 p-24 rounded-lg shadow-lg flex flex-col justify-center items-center">
+        <h1 className="text-4xl font-bold mb-8 ">Book Appointment</h1>
 
-      <div>
-        <label>Patient Name</label>
-        <input type="text" onChange={(e) => setPatientName(e.target.value)} />
-        <label>Doctor Address:</label>
-        <input
-          type="text"
-          value={doctorAddress}
-          onChange={(e) => setDoctorAddress(e.target.value)}
-        />
+        <div className="w-full sm:w-1/2 flex flex-col space-y-4">
+          <label className=" text-lg">
+            Patient Name:
+            <input
+              type="text"
+              onChange={(e) => setPatientName(e.target.value)}
+              className="p-2 mt-1 w-full rounded-lg bg-gray-700 border border-gray-600 rounded-md hover:bg-gray-800 transition duration-200 placeholder-white focus:outline-none focus:border-teal-500 border-2 border-transparent"
+            />
+          </label>
 
-        <label>Patient Address:</label>
-        <input
-          type="text"
-          value={patientAddress}
-          onChange={(e) => setPatientAddress(e.target.value)}
-        />
+          <label className=" text-lg">
+            Doctor Address:
+            <input
+              type="text"
+              value={doctorAddress}
+              onChange={(e) => setDoctorAddress(e.target.value)}
+              className="p-2 mt-1 w-full rounded-lg bg-gray-700 border border-gray-600 rounded-md hover:bg-gray-800 transition duration-200 placeholder-white focus:outline-none focus:border-teal-500 border-2 border-transparent"
+            />
+          </label>
 
-        <label>Date and Time:</label>
-        <DatePicker
-          selected={selectedDate}
-          onChange={(date) => setSelectedDate(date)}
-          showTimeSelect
-          dateFormat="Pp"
-          excludeTimes={bookedSlots.map((slot) => {
-            const hours = Math.floor(slot / 100);
-            const minutes = slot % 100;
-            return new Date(
-              selectedDate.getFullYear(),
-              selectedDate.getMonth(),
-              selectedDate.getDate(),
-              hours,
-              minutes
-            );
-          })}
-        />
+          <label className=" text-lg">
+            Patient Address:
+            <input
+              type="text"
+              value={patientAddress}
+              onChange={(e) => setPatientAddress(e.target.value)}
+              className="p-2 mt-1 w-full rounded-lg bg-gray-700 border border-gray-600 rounded-md hover:bg-gray-800 transition duration-200 placeholder-white focus:outline-none focus:border-teal-500 border-2 border-transparent"
+            />
+          </label>
 
-        <button onClick={handleBooking}>Book Appointment</button>
+          <label className=" text-lg mb-2">Date and Time:</label>
+          <DatePicker
+            selected={selectedDate}
+            onChange={(date) => setSelectedDate(date)}
+            showTimeSelect
+            dateFormat="Pp"
+            className="p-2 w-full rounded-lg bg-gray-700 border border-gray-600 rounded-md hover:bg-gray-800 transition duration-200 text-white focus:outline-none focus:border-teal-500 border-2 border-transparent"
+            calendarClassName="react-datepicker__calendar bg-gray-800 border-teal-500"
+            excludeTimes={bookedSlots.map((slot) => {
+              const hours = Math.floor(slot / 100);
+              const minutes = slot % 100;
+              return new Date(
+                selectedDate.getFullYear(),
+                selectedDate.getMonth(),
+                selectedDate.getDate(),
+                hours,
+                minutes
+              );
+            })}
+          />
+
+          <button
+            onClick={handleBooking}
+            className="mt-6 px-10 py-2 rounded-lg bg-teal-500 hover:bg-teal-600 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-teal-500"
+          >
+            Book Appointment
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -29,16 +29,50 @@ const PatientDashBoard = () => {
   };
 
   return (
-    <div className="patientdashboard">
-      <h2>Patient Dashboard</h2>
-      <p>Hello, Patient at address: {address}</p>
+    <div className="bg-gradient-to-b from-black to-gray-800 p-4 sm:p-10 font-mono text-white h-screen flex flex-col justify-center items-center">
+      <h2 className="text-3xl sm:text-4xl font-bold mb-6">Patient Dashboard</h2>
+      <p className="text-xl sm:text-2xl mb-24">
+        Hello, Patient at address: <span className="font-bold">{address}</span>
+      </p>
 
-      <button onClick={viewRecord}>View Record</button>
-      <button onClick={permissionsTab}>View Permission</button>
-      <button onClick={writepermission}>Write Permission</button>
-      <button onClick={insuranceclaim}>Insurance Claim</button>
-      <button onClick={viewInsuranceClaim}> View Claims</button>
-      <button onClick={bookAppointment}> Book Appointment</button>
+      <div className="flex flex-wrap justify-center gap-5 w-full px-4 sm:px-0">
+        <button
+          onClick={viewRecord}
+          className="my-2 px-4 sm:px-8 py-4 sm:py-5 w-full sm:w-1/4 rounded-lg bg-teal-500 hover:bg-gray-600 transition-colors duration-300"
+        >
+          View Record
+        </button>
+        <button
+          onClick={permissionsTab}
+          className="my-2 px-4 sm:px-8 py-4 sm:py-5 w-full sm:w-1/4 rounded-lg bg-teal-500 hover:bg-gray-600 transition-colors duration-300"
+        >
+          View Permission
+        </button>
+        <button
+          onClick={writepermission}
+          className="my-2 px-4 sm:px-8 py-4 sm:py-5 w-full sm:w-1/4 rounded-lg bg-teal-500 hover:bg-gray-600 transition-colors duration-300"
+        >
+          Write Permission
+        </button>
+        <button
+          onClick={insuranceclaim}
+          className="my-2 px-4 sm:px-8 py-4 sm:py-5 w-full sm:w-1/4 rounded-lg bg-teal-500 hover:bg-gray-600 transition-colors duration-300"
+        >
+          Insurance Claim
+        </button>
+        <button
+          onClick={viewInsuranceClaim}
+          className="my-2 px-4 sm:px-8 py-4 sm:py-5 w-full sm:w-1/4 rounded-lg bg-teal-500 hover:bg-gray-600 transition-colors duration-300"
+        >
+          View Claims
+        </button>
+        <button
+          onClick={bookAppointment}
+          className="my-2 px-4 sm:px-8 py-4 sm:py-5 w-full sm:w-1/4 rounded-lg bg-teal-500 hover:bg-gray-600 transition-colors duration-300"
+        >
+          Book Appointment
+        </button>
+      </div>
     </div>
   );
 };
