@@ -78,27 +78,25 @@ function ContractInteraction() {
               <strong className="text-yellow-500">Patient Name:</strong>{" "}
               {record.patientName}
               <br />
+              <strong className="text-yellow-500">Doctor Name:</strong>{" "}
+              {record.doctorName}
+              <br />
+              <strong className="text-yellow-500">Doctor Address:</strong>{" "}
+              {record.doctorAddress}
+              <br />
               <strong className="text-yellow-500">Patient Address:</strong>{" "}
               {record.patientAddress}
               <br />
-              <strong className="text-yellow-500">Insurer Address:</strong>{" "}
-              {record.InsurerAddress}
+              <strong className="text-yellow-500">Age:</strong> {record.age}
               <br />
-              <strong className="text-yellow-500">Plan Opted:</strong>{" "}
-              {record.plan}
+              <strong className="text-yellow-500">Gender:</strong>{" "}
+              {record.gender}
               <br />
-              <strong className="text-yellow-500">
-                Documents Applied:
-              </strong>{" "}
-              {record.documents}
+              <strong className="text-yellow-500">Diagnosis:</strong>{" "}
+              {record.diagnosis}
               <br />
-              <strong className="text-yellow-500">Amount Applied:</strong>{" "}
-              {record.amount}
-              <br />
-              <strong className="text-yellow-500">Processed:</strong>{" "}
-              {String(record.processed)}
-              <br />
-              <strong className="text-yellow-500">Paid:</strong> {record.paid}
+              <strong className="text-yellow-500">Prescription:</strong>{" "}
+              {record.prescription}
               <br />
             </div>
 

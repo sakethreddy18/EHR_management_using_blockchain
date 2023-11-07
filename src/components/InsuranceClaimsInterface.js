@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Web3 from "web3";
 import { useParams, useNavigate } from "react-router-dom";
-import InsuranceClaims from "../build/contracts/InsuranceClaims.json"; // Adjust the path as needed
+import InsuranceClaims from "../build/contracts/InsuranceClaims.json";
 
 const InsuranceClaimsInterface = () => {
   const [web3, setWeb3] = useState(null);
   const [contract, setContract] = useState(null);
   const [claims, setClaims] = useState([]);
-  const { address } = useParams(); // This is the insurer's address passed from the URL
+  const { address } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -15,11 +15,10 @@ const InsuranceClaimsInterface = () => {
       if (typeof window.ethereum !== "undefined") {
         const web3Instance = new Web3(window.ethereum);
         try {
-          await window.ethereum.enable(); // Request account access
+          await window.ethereum.enable();
 
           const networkId = await web3Instance.eth.net.getId();
           const deployedNetwork = InsuranceClaims.networks[networkId];
-
           if (deployedNetwork) {
             const contractInstance = new web3Instance.eth.Contract(
               InsuranceClaims.abi,
@@ -48,8 +47,6 @@ const InsuranceClaimsInterface = () => {
           const insurerClaims = await contract.methods
             .getClaims()
             .call({ from: address });
-
-          // Filter the claims where processed is true
           const processedClaims = insurerClaims.filter(
             (claim) => claim.processed
           );
@@ -78,28 +75,49 @@ const InsuranceClaimsInterface = () => {
   };
 
   return (
-    <div>
-      <h2>Claims</h2>
-      <ul>
+    <div className="bg-gradient-to-b from-black to-gray-800 p-4 sm:p-10 font-mono text-white pt-20 pb-20 flex flex-col justify-center items-center">
+      <h2 className="text-4xl font-bold mb-8">Claims</h2>
+      <ul className="w-full sm:w-2/3 list-decimal list-inside bg-gray-900 p-6 rounded-lg shadow-lg">
         {claims.map((claim, index) => (
-          <li key={index}>
-            <strong>Claim ID:</strong> {claim.claimid}
+          <li key={index} className="mb-6 p-2 border-b border-gray-700">
+            <strong className="text-lg text-yellow-500">Claim ID:</strong>{" "}
+            {claim.claimid}
             <br />
-            <strong>Patient Name:</strong> {claim.patientName}
+            <strong className="text-lg text-yellow-500">
+              Patient Name:
+            </strong>{" "}
+            {claim.patientName}
             <br />
-            <strong>Patient Address:</strong> {claim.patientAddress}
+            <strong className="text-lg text-yellow-500">
+              Patient Address:
+            </strong>{" "}
+            {claim.patientAddress}
             <br />
-            <strong>Insurer Address:</strong> {claim.InsurerAddress}
+            <strong className="text-lg text-yellow-500">
+              Insurer Address:
+            </strong>{" "}
+            {claim.InsurerAddress}
             <br />
-            <strong>Plan Opted:</strong> {claim.plan}
+            <strong className="text-lg text-yellow-500">
+              Plan Opted:
+            </strong>{" "}
+            {claim.plan}
             <br />
-            <strong>Documents Applied:</strong> {claim.documents}
+            <strong className="text-lg text-yellow-500">
+              Documents Applied:
+            </strong>{" "}
+            {claim.documents}
             <br />
-            <strong>Amount Applied:</strong> {claim.amount}
+            <strong className="text-lg text-yellow-500">
+              Amount Applied:
+            </strong>{" "}
+            {claim.amount}
             <br />
-            <strong>Processed:</strong> {String(claim.processed)}
+            <strong className="text-lg text-yellow-500">Processed:</strong>{" "}
+            {String(claim.processed)}
             <br />
-            <strong>Paid:</strong> {String(claim.paid)}
+            <strong className="text-lg text-yellow-500">Paid:</strong>{" "}
+            {String(claim.paid)}
             <br />
             {claim.paid === "false" && (
               <button
@@ -111,8 +129,9 @@ const InsuranceClaimsInterface = () => {
                     claim.claimid
                   )
                 }
+                className="mt-4 px-10 py-2 rounded-lg bg-teal-500 hover:bg-teal-600 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-teal-500"
               >
-                Payment
+                Process Payment
               </button>
             )}
           </li>

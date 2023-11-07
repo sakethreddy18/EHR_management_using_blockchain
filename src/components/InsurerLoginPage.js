@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Web3 from "web3";
 import InsurerRegistry from "../build/contracts/InsurerRegistry.json"; // Import the contract ABI
 import { useNavigate } from "react-router-dom";
-import "../CSS/InsurerLoginPage.css";
 
 const InsurerLoginPage = () => {
   const navigate = useNavigate();
@@ -40,17 +39,26 @@ const InsurerLoginPage = () => {
   };
 
   return (
-    <div className="InsurerLoginPage">
-      <h2>Insurer Login</h2>
-      <div>
-        <label>Insurer Address:</label>
-        <input
-          type="text"
-          value={insurerAddress}
-          onChange={(e) => setInsurerAddress(e.target.value)}
-        />
+    <div className="bg-gradient-to-b from-black to-gray-800 min-h-screen flex flex-col justify-center items-center p-4 font-mono text-white">
+      <div className="w-full max-w-4xl bg-gray-900 p-20 rounded-lg shadow-lg">
+        <h2 className="text-3xl sm:text-4xl font-bold mb-6">Insurer Login</h2>
+        <div className="flex flex-col w-full mb-4">
+          <label className="mb-2 font-bold">Insurer Address:</label>
+          <input
+            type="text"
+            value={insurerAddress}
+            onChange={(e) => setInsurerAddress(e.target.value)}
+            className="p-2 w-full text-white bg-gray-700 border border-gray-600 rounded-md hover:bg-gray-800 transition duration-200"
+            required
+          />
+        </div>
+        <button
+          onClick={handleCheckRegistration}
+          className="px-6 py-3 bg-teal-500 text-white font-bold text-lg rounded-lg cursor-pointer transition-transform transition-colors duration-300 ease-in hover:bg-teal-600 active:bg-teal-700"
+        >
+          Check Registration
+        </button>
       </div>
-      <button onClick={handleCheckRegistration}>Check Registration</button>
     </div>
   );
 };

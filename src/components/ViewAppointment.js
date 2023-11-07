@@ -1,5 +1,4 @@
-// src/ViewAppointments.js
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Web3 from "web3";
 import DoctorAppointment from "../build/contracts/DoctorAppointment.json";
@@ -74,21 +73,39 @@ function ViewAppointments() {
   };
 
   return (
-    <div className="viewappointments">
-      <h1>View Appointments</h1>
+    <div className="bg-gradient-to-b from-black to-gray-800 text-white p-10 font-mono">
+      <h1 className="text-4xl font-bold text-center mb-10">
+        View Appointments
+      </h1>
 
-      <h2>Appointments List:</h2>
-      <ul>
+      <h2 className="text-2xl">Appointments List:</h2>
+      <ul className="list-disc ml-5">
         {appointments.map((appointment, index) => (
-          <li key={index}>
-            Patient Name: {appointment.name}
-            Date: {appointment.date}
-            Time: {appointment.time}
-            Patient: {appointment.patient}
+          <li
+            key={index}
+            className="flex justify-between items-start border-white border p-5 mb-5 flex-wrap"
+          >
+            <div>
+              <span className="text-yellow-500">Patient Name: </span>
+              {appointment.name}
+            </div>
+            <div>
+              <span className="text-yellow-500">Date: </span>
+              {appointment.date}
+            </div>
+            <div>
+              <span className="text-yellow-500">Time: </span>
+              {appointment.time}
+            </div>
+            <div>
+              <span className="text-yellow-500">Patient: </span>
+              {appointment.patient}
+            </div>
             <button
               onClick={() =>
                 removeAppointment(appointment.date, appointment.time)
               }
+              className="px-4 py-2 rounded-md bg-teal-500 text-white hover:bg-gray-600 hover:scale-105"
             >
               Remove Appointment
             </button>

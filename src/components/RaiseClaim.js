@@ -19,7 +19,8 @@ function RaiseClaim({ contract }) {
   const [amount, setAmount] = useState(0);
   const { patient_addr } = useParams();
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
       const web3 = new Web3(window.ethereum);
 
@@ -58,8 +59,8 @@ function RaiseClaim({ contract }) {
           Raise a Claim
         </h2>
         <form
-          className="bg-gray-900 p-6 rounded-lg shadow-lg grid grid-cols-1 sm:grid-cols-2 gap-4"
           onSubmit={handleSubmit}
+          className="bg-gray-900 p-6 rounded-lg shadow-lg grid grid-cols-1 sm:grid-cols-2 gap-4"
         >
           <div className="mb-4">
             <label className="block font-bold text-white" htmlFor="patientName">
@@ -136,7 +137,7 @@ function RaiseClaim({ contract }) {
 
           <div className="col-span-full">
             <button
-              onClick={handleSubmit}
+              type="submit"
               className="px-5 py-2.5 bg-green-500 text-white font-bold text-lg rounded-lg cursor-pointer mt-3 mr-5 transition-transform transition-colors duration-300 ease-in hover:bg-teal-500 active:bg-gray-700"
             >
               Submit

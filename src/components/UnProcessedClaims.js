@@ -151,33 +151,56 @@ const UnProcessedClaims = () => {
       }
     }
   };
-
   return (
-    <div>
-      <h2>Claims</h2>
-      <ul>
+    <div className="bg-gradient-to-b from-black to-gray-800 p-4 sm:p-10 font-mono text-white pt-20 pb-20 flex flex-col justify-center items-center">
+      <h2 className="text-4xl font-bold mb-8">Claims</h2>
+
+      <ul className="w-full sm:w-2/3 list-decimal list-inside bg-gray-900 p-6 rounded-lg shadow-lg">
         {claims.map((claim, index) => (
-          <li key={index}>
-            <strong>Claim ID:</strong> {claim.claimid}
+          <li key={index} className="mb-6 p-2 border-b border-gray-700">
+            <strong className="text-lg text-yellow-500">Claim ID:</strong>{" "}
+            {claim.claimid}
             <br />
-            <strong>Patient Name:</strong> {claim.patientName}
+            <strong className="text-lg text-yellow-500">
+              Patient Name:
+            </strong>{" "}
+            {claim.patientName}
             <br />
-            <strong>Patient Address:</strong> {claim.patientAddress}
+            <strong className="text-lg text-yellow-500">
+              Patient Address:
+            </strong>{" "}
+            {claim.patientAddress}
             <br />
-            <strong>Insurer Address:</strong> {claim.InsurerAddress}
+            <strong className="text-lg text-yellow-500">
+              Insurer Address:
+            </strong>{" "}
+            {claim.InsurerAddress}
             <br />
-            <strong>Plan Opted:</strong> {claim.plan}
+            <strong className="text-lg text-yellow-500">
+              Plan Opted:
+            </strong>{" "}
+            {claim.plan}
             <br />
-            <strong>Documents Applied:</strong> {claim.documents}
+            <strong className="text-lg text-yellow-500">
+              Documents Applied:
+            </strong>{" "}
+            {claim.documents}
             <br />
-            <strong>Amount Applied:</strong> {claim.amount}
+            <strong className="text-lg text-yellow-500">
+              Amount Applied:
+            </strong>{" "}
+            {claim.amount}
             <br />
-            <strong>Processed:</strong> {String(claim.processed)}
+            <strong className="text-lg text-yellow-500">Processed:</strong>{" "}
+            {String(claim.processed)}
             <br />
-            <strong>Paid:</strong> {claim.paid}
+            <strong className="text-lg text-yellow-500">Paid:</strong>{" "}
+            {claim.paid}
             <br />
-            <button onClick={() => viewDocPermission(claim.patientAddress)}>
-              {" "}
+            <button
+              onClick={() => viewDocPermission(claim.patientAddress)}
+              className="mr-4 mb-2 px-4 py-1 rounded-lg bg-teal-500 hover:bg-teal-600 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-teal-500"
+            >
               View Documents
             </button>
             <button
@@ -189,11 +212,16 @@ const UnProcessedClaims = () => {
                   claim.amount
                 )
               }
+              className="mr-4 mb-2 px-4 py-1 rounded-lg bg-green-500 hover:bg-green-600 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-green-500"
             >
-              {" "}
               Accept
             </button>
-            <button onClick={() => rejectClaim(claim.claimid)}> Reject</button>
+            <button
+              onClick={() => rejectClaim(claim.claimid)}
+              className="mb-2 px-4 py-1 rounded-lg bg-red-500 hover:bg-red-600 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-red-500"
+            >
+              Reject
+            </button>
           </li>
         ))}
       </ul>

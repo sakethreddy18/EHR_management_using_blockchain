@@ -32,7 +32,8 @@ const PatientDashBoard = () => {
     <div className="bg-gradient-to-b from-black to-gray-800 p-4 sm:p-10 font-mono text-white h-screen flex flex-col justify-center items-center">
       <h2 className="text-3xl sm:text-4xl font-bold mb-6">Patient Dashboard</h2>
       <p className="text-xl sm:text-2xl mb-24">
-        Hello, Patient at address: <span className="font-bold">{address}</span>
+        Hello, Patient at address:{" "}
+        <span className="font-bold text-yellow-500">{address}</span>
       </p>
 
       <div className="flex flex-wrap justify-center gap-5 w-full px-4 sm:px-0">

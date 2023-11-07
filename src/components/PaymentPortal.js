@@ -89,24 +89,53 @@ const PaymentPortal = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>From Address</label>
-          <input type="text" value={insurerAddr} readOnly />
+    <div className="bg-gradient-to-b from-black to-gray-800 p-4 sm:p-10 font-mono text-white pt-20 pb-20 flex flex-col justify-center items-center">
+      <form
+        onSubmit={handleSubmit}
+        className="w-full sm:w-3/4 bg-gray-900 p-8 rounded-lg shadow-lg border border-white"
+      >
+        <div className="mb-4">
+          <label className="text-lg text-yellow-500 block mb-2">
+            From Address
+          </label>
+          <input
+            type="text"
+            value={insurerAddr}
+            readOnly
+            className="w-full px-3 py-2 bg-gray-700 text-white rounded border border-gray-600"
+          />
         </div>
 
-        <div>
-          <label>Patient Address</label>
-          <input type="text" value={patientAddr} readOnly />
+        <div className="mb-4">
+          <label className="text-lg text-yellow-500 block mb-2">
+            Patient Address
+          </label>
+          <input
+            type="text"
+            value={patientAddr}
+            readOnly
+            className="w-full px-3 py-2 bg-gray-700 text-white rounded border border-gray-600"
+          />
         </div>
 
-        <div>
-          <label> Amount (eth)</label>
-          <input type="number" value={amount} readOnly />
+        <div className="mb-4">
+          <label className="text-lg text-yellow-500 block mb-2">
+            Amount (eth)
+          </label>
+          <input
+            type="number"
+            value={amount}
+            readOnly
+            className="w-full px-3 py-2 bg-gray-700 text-white rounded border border-gray-600"
+          />
         </div>
 
-        <button type="submit">Pay</button>
+        <button
+          type="submit"
+          className="px-10 py-2 rounded-lg bg-teal-500 hover:bg-teal-700 transition-colors duration-300 focus:outline-none focus:ring-4 focus:ring-teal-500"
+        >
+          Pay
+        </button>
       </form>
     </div>
   );

@@ -6,6 +6,9 @@ module.exports = {
       backgroundColor: {
         "custom-teal": "#00adb5",
       },
+      textColor: {
+        "custom-blue": "#CDF5FD", // Add your hex code here
+      },
     },
   },
   plugins: [],
