@@ -100,23 +100,53 @@ const PatientWritePermission = () => {
   };
 
   return (
-    <div className="patientwritepermission">
-      <h1>Write Permission Management</h1>
-      <div>
-        <label>Doctors Wallet Address: </label>
-        <input
-          type="text"
-          value={walletAddress}
-          onChange={(e) => setWalletAddress(e.target.value)}
-        />
-      </div>
-      <div>
-        <button onClick={givePermission}>Give Permission</button>
-        <button onClick={revokePermission}>Revoke Permission</button>
-        <button onClick={checkPermission}>Check Permission</button>
-      </div>
-      <div>
-        <p>Permission Status: {permissionStatus ? "Granted" : "Revoked"}</p>
+    <div className="bg-gradient-to-b from-black to-gray-800 p-4 sm:p-10 font-mono text-white h-screen flex flex-col justify-center items-center">
+      <div className="w-full max-w-6xl bg-gray-900 p-24 rounded-lg shadow-lg flex flex-col justify-center items-center">
+        <h1 className="text-3xl sm:text-4xl font-bold mb-6">
+          Write Permission Management
+        </h1>
+
+        <div className="flex flex-col w-full sm:w-1/2 mb-4">
+          <label className="mb-2 font-bold">
+            Doctors Wallet Address:
+            <input
+              type="text"
+              value={walletAddress}
+              onChange={(e) => setWalletAddress(e.target.value)}
+              className="p-2 mt-1 w-full rounded-lg bg-gray-700 border border-gray-600 rounded-md hover:bg-gray-800 transition duration-200 placeholder-white"
+            />
+          </label>
+        </div>
+
+        <div className="flex gap-4 mb-6">
+          <button
+            onClick={givePermission}
+            className="px-8 py-4 rounded-lg bg-green-500 hover:bg-gray-600 transition-colors duration-300"
+          >
+            Give Permission
+          </button>
+          <button
+            onClick={revokePermission}
+            className="px-8 py-4 rounded-lg bg-red-500 hover:bg-gray-600 transition-colors duration-300"
+          >
+            Revoke Permission
+          </button>
+          <button
+            onClick={checkPermission}
+            className="px-8 py-4 rounded-lg bg-blue-500 hover:bg-gray-600 transition-colors duration-300"
+          >
+            Check Permission
+          </button>
+        </div>
+
+        <div className="text-xl">
+          <p>
+            Permission Status:{" "}
+            <span className="font-bold">
+              {permissionStatus ? "Granted" : "Revoked"}
+            </span>
+          </p>
+        </div>
       </div>
     </div>
   );

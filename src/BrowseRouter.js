@@ -26,6 +26,10 @@ import InsurerViewRecords from "./components/InsurerViewRecords";
 import ContractInteractionDoctor from "./components/ContractInteractionDoctor";
 import PaymentPortal from "./components/PaymentPortal";
 import PatientViewClaims from "./components/PatientViewClaims";
+import BookAppointment from "./components/BookAppointment";
+import ViewAppointment from "./components/ViewAppointment";
+import Footer from "./components/Footer";
+import LandingPage_1 from "./components/LandingPage_1";
 
 const BrowseRouter = () => {
   const [web3, setWeb3] = useState(null);
@@ -56,8 +60,10 @@ const BrowseRouter = () => {
   return (
     <BrowserRouter>
       <NavBar></NavBar>
+
       <Routes>
-        <Route path="/" element={<LandingPage></LandingPage>}></Route>
+        <Route path="/" element={<LandingPage_1></LandingPage_1>}></Route>
+        <Route path="/register" element={<LandingPage></LandingPage>}></Route>
         <Route
           path="/patient/:address/writepermission"
           element={<PatientWritePermission></PatientWritePermission>}
@@ -103,9 +109,18 @@ const BrowseRouter = () => {
           element={<RecordPermission />}
         ></Route>
         <Route
+          path="/patient/:address/bookappointment"
+          element={<BookAppointment></BookAppointment>}
+        ></Route>
+        <Route
           path="/doctor/:address/viewrec"
           element={<DoctorPermission />}
         ></Route>
+        <Route
+          path="/doctor/:address/viewapp"
+          element={<ViewAppointment />}
+        ></Route>
+
         <Route
           path="/doctor/:address/viewrec/:patientaddress"
           element={<ContractInteractionDoctor />}
@@ -141,6 +156,7 @@ const BrowseRouter = () => {
           element={<InsurerViewRecords></InsurerViewRecords>}
         ></Route>
       </Routes>
+      <Footer></Footer>
     </BrowserRouter>
   );
 };

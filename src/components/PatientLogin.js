@@ -2,7 +2,7 @@ import PatientRegistry from "../build/contracts/PatientRegistry.json";
 import React, { useState, useEffect } from "react";
 import Web3 from "web3";
 import { useNavigate } from "react-router-dom";
-import "../CSS/PatientLogin.css";
+import "../CSS/DoctorLoginPage.css"; // Import the same CSS file used for DoctorLoginPage
 
 const PatientLogin = () => {
   const navigate = useNavigate();
@@ -45,7 +45,7 @@ const PatientLogin = () => {
         .isRegisteredPatient(walletAddress)
         .call();
       if (!result) {
-        alert("patient not registered");
+        alert("Patient not registered");
         return;
       }
       console.log(walletAddress);
@@ -59,30 +59,26 @@ const PatientLogin = () => {
   };
 
   return (
-    <div className="patientlogin">
-      <h1>Login Page</h1>
-      <div>
-        <label>
-          Wallet Address:
+    <div className="bg-gradient-to-b from-black to-gray-800 min-h-screen flex flex-col justify-center items-center p-4 font-mono text-white">
+      <div className="w-full max-w-4xl bg-gray-900 p-20 rounded-lg shadow-lg">
+        <h2 className="text-3xl sm:text-4xl font-bold mb-6">Patient Login</h2>
+        <div className="flex flex-col w-full mb-4">
+          <label className="mb-2 font-bold">Wallet Address:</label>
           <input
             type="text"
             value={walletAddress}
             onChange={(e) => setWalletAddress(e.target.value)}
+            className="p-2 w-full text-white bg-gray-700 border border-gray-600 rounded-md hover:bg-gray-800 transition duration-200"
+            required
           />
-        </label>
-      </div>
-      <div>
-        <button onClick={handleLogin} disabled={!contract || isLoading}>
+        </div>
+        <button
+          onClick={handleLogin}
+          disabled={!contract || isLoading}
+          className="px-6 py-3 bg-teal-500 text-white font-bold text-lg rounded-lg cursor-pointer transition-transform transition-colors duration-300 ease-in hover:bg-teal-600 active:bg-teal-700"
+        >
           Login
         </button>
-      </div>
-      <div>
-        {isLoading && <p>Loading...</p>}
-        {!isLoading && isLoggedIn ? (
-          <p>Welcome! You are logged in as a registered patient.</p>
-        ) : (
-          <p>Not registered or not logged in.</p>
-        )}
       </div>
     </div>
   );

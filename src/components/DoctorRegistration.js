@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import Web3 from "web3";
-import DoctorRegistration from "../build/contracts/DoctorRegistration.json"; // Import the contract ABI
+import DoctorRegistration from "../build/contracts/DoctorRegistration.json";
 import "../CSS/DoctorRegistration.css";
+
 const DoctorRegistrationForm = () => {
   const [doctorAddress, setDoctorAddress] = useState("");
   const [doctorName, setDoctorName] = useState("");
@@ -49,9 +50,6 @@ const DoctorRegistrationForm = () => {
         DoctorRegistration.abi,
         DoctorRegistration.networks[networkId].address
       );
-      const accounts = await web3.eth.getAccounts();
-      const account = accounts[0];
-      console.log(web3);
 
       // Check if dateOfBirth is in the format dd/mm/yyyy
       const datePattern = /^\d{1,2}\/\d{1,2}\/\d{4}$/;
@@ -59,14 +57,16 @@ const DoctorRegistrationForm = () => {
         alert("Please enter Date of Birth in the format dd/mm/yyyy");
         return;
       }
+
       const isRegDoc = await contract.methods
         .isRegisteredDoctor(doctorAddress)
         .call();
 
       if (isRegDoc) {
-        alert("Doctor already exsists");
+        alert("Doctor already exists");
         return;
       }
+
       await contract.methods
         .registerDoctor(
           doctorAddress,
@@ -81,97 +81,194 @@ const DoctorRegistrationForm = () => {
           workExperience
         )
         .send({ from: doctorAddress });
+
       alert("Doctor registered successfully!");
     } catch (error) {
       console.error("Error:", error);
-      alert("An error");
+      alert("An error occurred while registering the doctor.");
     }
   };
 
   return (
-    <div className="DoctorRegistrationForm">
-      <h2>Doctor Registration Form123123</h2>
-      <div>
-        <label>Doctor Address:</label>
-        <input
-          type="text"
-          value={doctorAddress}
-          onChange={(e) => setDoctorAddress(e.target.value)}
-        />
+    <div className="createehr min-h-screen flex items-center justify-center p-4 bg-gradient-to-b from-black to-gray-800 font-mono">
+      <div className="w-full max-w-2xl">
+        <h2 className="text-3xl text-white mb-6 font-bold text-center">
+          Doctor Registration
+        </h2>
+        <form className="bg-gray-900 p-6 rounded-lg shadow-lg grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="mb-4">
+            <label
+              className="block font-bold text-white"
+              htmlFor="doctorAddress"
+            >
+              Doctor Address:
+            </label>
+            <input
+              id="doctorAddress"
+              name="doctorAddress"
+              type="text"
+              required
+              className="mt-2 p-2 w-full text-white bg-gray-700 border border-gray-600 rounded-md hover:bg-gray-800 transition duration-200"
+              placeholder="Doctor Address"
+              value={doctorAddress}
+              onChange={(e) => setDoctorAddress(e.target.value)}
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block font-bold text-white" htmlFor="doctorName">
+              Doctor Name:
+            </label>
+            <input
+              id="doctorName"
+              name="doctorName"
+              type="text"
+              required
+              className="mt-2 p-2 w-full text-white bg-gray-700 border border-gray-600 rounded-md hover:bg-gray-800 transition duration-200"
+              placeholder="Doctor Name"
+              value={doctorName}
+              onChange={(e) => setDoctorName(e.target.value)}
+            />
+          </div>
+          <div className="mb-4">
+            <label
+              className="block font-bold text-white"
+              htmlFor="hospitalName"
+            >
+              Hospital Name:
+            </label>
+            <input
+              id="hospitalName"
+              name="hospitalName"
+              type="text"
+              required
+              className="mt-2 p-2 w-full text-white bg-gray-700 border border-gray-600 rounded-md hover:bg-gray-800 transition duration-200"
+              placeholder="Hospital Name"
+              value={hospitalName}
+              onChange={(e) => setHospitalName(e.target.value)}
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block font-bold text-white" htmlFor="dateOfBirth">
+              Date of Birth:
+            </label>
+            <input
+              id="dateOfBirth"
+              name="dateOfBirth"
+              type="text"
+              placeholder="DOB"
+              required
+              className="mt-2 p-2 w-full text-white bg-gray-700 border border-gray-600 rounded-md hover-bg-gray-800 transition duration-200"
+              value={dateOfBirth}
+              onChange={(e) => setDateOfBirth(e.target.value)}
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block font-bold text-white" htmlFor="gender">
+              Gender:
+            </label>
+            <input
+              id="gender"
+              name="gender"
+              type="text"
+              required
+              className="mt-2 p-2 w-full text-white bg-gray-700 border border-gray-600 rounded-md hover-bg-gray-800 transition duration-200"
+              placeholder="Gender"
+              value={gender}
+              onChange={(e) => setGender(e.target.value)}
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block font-bold text-white" htmlFor="phoneNumber">
+              Phone Number:
+            </label>
+            <input
+              id="phoneNumber"
+              name="phoneNumber"
+              type="text"
+              required
+              className="mt-2 p-2 w-full text-white bg-gray-700 border border-gray-600 rounded-md hover-bg-gray-800 transition duration-200"
+              placeholder="Phone Number"
+              value={phoneNumber}
+              onChange={(e) => setPhoneNumber(e.target.value)}
+            />
+          </div>
+          <div className="mb-4">
+            <label
+              className="block font-bold text-white"
+              htmlFor="specialization"
+            >
+              Specialization:
+            </label>
+            <input
+              id="specialization"
+              name="specialization"
+              type="text"
+              required
+              className="mt-2 p-2 w-full text-white bg-gray-700 border border-gray-600 rounded-md hover-bg-gray-800 transition duration-200"
+              placeholder="Specialization"
+              value={specialization}
+              onChange={(e) => setSpecialization(e.target.value)}
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block font-bold text-white" htmlFor="department">
+              Department:
+            </label>
+            <input
+              id="department"
+              name="department"
+              type="text"
+              required
+              className="mt-2 p-2 w-full text-white bg-gray-700 border border-gray-600 rounded-md hover-bg-gray-800 transition duration-200"
+              placeholder="Department"
+              value={department}
+              onChange={(e) => setDepartment(e.target.value)}
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block font-bold text-white" htmlFor="designation">
+              Designation:
+            </label>
+            <input
+              id="designation"
+              name="designation"
+              type="text"
+              required
+              className="mt-2 p-2 w-full text-white bg-gray-700 border border-gray-600 rounded-md hover-bg-gray-800 transition duration-200"
+              placeholder="Designation"
+              value={designation}
+              onChange={(e) => setDesignation(e.target.value)}
+            />
+          </div>
+          <div className="mb-4">
+            <label
+              className="block font-bold text-white"
+              htmlFor="workExperience"
+            >
+              Work Experience:
+            </label>
+            <input
+              id="workExperience"
+              name="workExperience"
+              type="text"
+              required
+              className="mt-2 p-2 w-full text-white bg-gray-700 border border-gray-600 rounded-md hover-bg-gray-800 transition duration-200"
+              placeholder="Work Experience"
+              value={workExperience}
+              onChange={(e) => setWorkExperience(e.target.value)}
+            />
+          </div>
+        </form>
+        <div className="text-center mt-6">
+          <button
+            type="button"
+            onClick={handleRegister}
+            className="py-3 px-4 bg-teal-500 text-white rounded-md font-medium hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500"
+          >
+            Register Doctor
+          </button>
+        </div>
       </div>
-      <div>
-        <label>Doctor Name:</label>
-        <input
-          type="text"
-          value={doctorName}
-          onChange={(e) => setDoctorName(e.target.value)}
-        />
-      </div>
-      <div>
-        <label>Hospital Name:</label>
-        <input
-          type="text"
-          value={hospitalName}
-          onChange={(e) => setHospitalName(e.target.value)}
-        />
-      </div>
-      <div>
-        <label>Date of Birth:</label>
-        <input
-          type="text"
-          value={dateOfBirth}
-          onChange={(e) => setDateOfBirth(e.target.value)}
-        />
-      </div>
-      <div>
-        <label>Gender:</label>
-        <input
-          type="text"
-          value={gender}
-          onChange={(e) => setGender(e.target.value)}
-        />
-      </div>
-      <div>
-        <label>Phone Number:</label>
-        <input
-          type="text"
-          value={phoneNumber}
-          onChange={(e) => setPhoneNumber(e.target.value)}
-        />
-      </div>
-      <div>
-        <label>Specialization:</label>
-        <input
-          type="text"
-          value={specialization}
-          onChange={(e) => setSpecialization(e.target.value)}
-        />
-      </div>
-      <div>
-        <label>Department:</label>
-        <input
-          type="text"
-          value={department}
-          onChange={(e) => setDepartment(e.target.value)}
-        />
-      </div>
-      <div>
-        <label>Designation:</label>
-        <input
-          type="text"
-          value={designation}
-          onChange={(e) => setDesignation(e.target.value)}
-        />
-      </div>
-      <div>
-        <label>Work Experience:</label>
-        <input
-          type="text"
-          value={workExperience}
-          onChange={(e) => setWorkExperience(e.target.value)}
-        />
-      </div>
-      <button onClick={handleRegister}>Register Doctor</button>
     </div>
   );
 };

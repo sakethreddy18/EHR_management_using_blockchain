@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Web3 from "web3";
 import record from "../build/contracts/record.json"; // Replace with the correct path to your ABI JSON
 import { useParams, useNavigate } from "react-router-dom";
-import "../CSS/DoctorPermission.css";
+import "../big_css/DoctorPermission.css";
 
 function DoctorPermission() {
   const { address } = useParams();
@@ -52,7 +52,7 @@ function DoctorPermission() {
       if (isAuthorized) {
         navigate("/doctor/" + doctorAddress + "/viewrec/" + patientAddress);
       } else {
-        alert("Not Authorised");
+        alert("Not Authorized");
         return;
       }
     } catch (error) {
@@ -64,27 +64,35 @@ function DoctorPermission() {
 
   console.log(doctorAddress);
   return (
-    <div className="DoctorPermission">
-      <h1>Doctor Permission</h1>
-      <div>
-        <label>
-          Patient Address:
+    <div className="backgroundImage bg-gradient-to-b from-black to-gray-800 min-h-screen flex flex-col justify-center items-center p-4 font-mono text-white">
+      <div className="w-full max-w-4xl bg-gray-900 p-20 rounded-lg shadow-lg">
+        <h2 className="text-3xl sm:text-4xl font-bold mb-6">
+          Doctor Permission
+        </h2>
+        <div className="flex flex-col w-full mb-4">
+          <label className="mb-2 font-bold">Patient Address:</label>
           <input
             type="text"
             value={patientAddress}
             onChange={(e) => setPatientAddress(e.target.value)}
+            className="p-2 w-full text-white bg-gray-700 border border-gray-600 rounded-md hover:bg-gray-800 transition duration-200"
             required
           />
-        </label>
-      </div>
-      <div>
-        <label>
-          Doctor Address:
-          <input type="text" value={address} />
-        </label>
-      </div>
-      <div>
-        <button onClick={checkPermission} disabled={!contract || isLoading}>
+        </div>
+        <div className="flex flex-col w-full mb-4">
+          <label className="mb-2 font-bold">Doctor Address:</label>
+          <input
+            type="text"
+            value={address}
+            readOnly
+            className="p-2 w-full text-white bg-gray-700 border border-gray-600 rounded-md"
+          />
+        </div>
+        <button
+          onClick={checkPermission}
+          disabled={!contract || isLoading}
+          className="px-6 py-3 bg-teal-500 text-white font-bold text-lg rounded-lg cursor-pointer transition-transform transition-colors duration-300 ease-in hover:bg-teal-600 active:bg-teal-700"
+        >
           Check Permission
         </button>
       </div>

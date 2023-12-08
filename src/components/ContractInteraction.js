@@ -62,62 +62,68 @@ function ContractInteraction() {
   };
 
   return (
-    <div className="contractinteraction">
-      <h1>Record Viewer</h1>
-      <div>
-        <h2>All Records:</h2>
-        <ul>
-          {records.map((record, index) => (
-            <li key={index}>
-              <strong>Record Id: {record.recordId}</strong>
+    <div className="bg-gradient-to-b from-black to-gray-800 text-white p-10 font-mono">
+      <h1 className="text-4xl font-bold text-center mb-10">Record Viewer</h1>
+      <ul>
+        {records.map((record, index) => (
+          <li
+            key={index}
+            className="flex justify-between items-start border-white border p-5 mb-5 flex-wrap"
+          >
+            {/* Record data */}
+            <div className="flex-none w-1/2 pr-5">
+              <strong className="text-xl text-yellow-500">Record Id:</strong>{" "}
+              {record.recordId}
               <br />
-              Patient Name: {record.patientName}
+              <strong className="text-yellow-500">Patient Name:</strong>{" "}
+              {record.patientName}
               <br />
-              Doctor Name: {record.doctorName}
+              <strong className="text-yellow-500">Doctor Name:</strong>{" "}
+              {record.doctorName}
               <br />
-              Doctor Address: {record.doctorAddress}
+              <strong className="text-yellow-500">Doctor Address:</strong>{" "}
+              {record.doctorAddress}
               <br />
-              Age: {record.age}
+              <strong className="text-yellow-500">Patient Address:</strong>{" "}
+              {record.patientAddress}
               <br />
-              Gender: {record.gender}
+              <strong className="text-yellow-500">Age:</strong> {record.age}
               <br />
-              Diagnosis: {record.diagnosis}
+              <strong className="text-yellow-500">Gender:</strong>{" "}
+              {record.gender}
               <br />
-              Prescription: {record.prescription}
+              <strong className="text-yellow-500">Diagnosis:</strong>{" "}
+              {record.diagnosis}
               <br />
-              <section>
-                <h2>Retrieve & View</h2>
-                <button onClick={() => retrieveFromWeb3(record.cid)}>
-                  Retrieve from Web3.Storage
-                </button>
+              <strong className="text-yellow-500">Prescription:</strong>{" "}
+              {record.prescription}
+              <br />
+            </div>
 
-                {/* Check if we have a URL for this CID */}
-                {urlMap[record.cid] && (
-                  <div
-                    style={{
-                      border: "1px solid black",
-                      marginTop: "20px",
-                      width: "100%",
-                      height: "400px",
-                      overflow: "hidden",
-                    }}
-                  >
-                    <embed
-                      src={urlMap[record.cid]}
-                      type="application/pdf"
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        overflow: "hidden",
-                      }}
-                    />
-                  </div>
-                )}
-              </section>
-            </li>
-          ))}
-        </ul>
-      </div>
+            {/* PDF Viewer */}
+            <div className="flex-none w-1/2">
+              <h2 className="text-2xl mb-3">Retrieve & View</h2>
+              <button
+                onClick={() => retrieveFromWeb3(record.cid)}
+                className="px-8 py-3 rounded-lg bg-teal-500 hover:bg-gray-600 transition-colors duration-300 transform hover:scale-105"
+              >
+                Retrieve from Web3.Storage
+              </button>
+
+              {/* Check if we have a URL for this CID */}
+              {urlMap[record.cid] && (
+                <div className="border-white border mt-5 overflow-hidden h-[fit-content]">
+                  <embed
+                    src={urlMap[record.cid]}
+                    type="application/pdf"
+                    className="w-full h-full"
+                  />
+                </div>
+              )}
+            </div>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
