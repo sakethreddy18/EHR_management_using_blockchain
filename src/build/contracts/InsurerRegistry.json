@@ -9352,12 +9352,12 @@
     "5777": {
       "events": {},
       "links": {},
-      "address": "0x0691E714A418E5D2BD25a06aaFC9A02482A2EA70",
-      "transactionHash": "0xc7178e020ea0ff9d5a450da83307e9f891653231ba229683a1001bb2e8849d74"
+      "address": "0x6B23FAb93126682F9ab85Af27c01b5cD29c80380",
+      "transactionHash": "0xb2cf7f7e9d5624698ca3c77313626d32e0556449df6ba5c19694d423aff0e4b6"
     }
   },
   "schemaVersion": "3.4.13",
-  "updatedAt": "2023-11-03T08:47:09.083Z",
+  "updatedAt": "2023-11-07T09:18:38.963Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",

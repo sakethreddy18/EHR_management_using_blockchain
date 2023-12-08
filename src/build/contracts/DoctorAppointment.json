@@ -17921,12 +17921,12 @@
     "5777": {
       "events": {},
       "links": {},
-      "address": "0x6d8EfeBfaf754bdE774002306Bc6A9749314C7Ae",
-      "transactionHash": "0x40a744731bb3c644c1a55fce7c1422c255039ad478f455e9aeb078504d708c6e"
+      "address": "0xD8A07FAbe65dfCD34a3909b7745EEdaE0BEB25BA",
+      "transactionHash": "0x30d576a465a2bef916d8798c7d22ecb78c6ffe0383e2e8a08ccdf229b2f8361b"
     }
   },
   "schemaVersion": "3.4.13",
-  "updatedAt": "2023-11-03T08:47:09.633Z",
+  "updatedAt": "2023-11-07T09:18:39.407Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",

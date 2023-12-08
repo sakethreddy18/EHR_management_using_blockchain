@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import "../big_css/CreateEHR.css";
 import { Web3Storage } from "web3.storage";
+import { render, fireEvent, waitFor } from "@testing-library/react";
 
 const CreateEhr = () => {
   const { address } = useParams(); // Retrieve account address from URL
