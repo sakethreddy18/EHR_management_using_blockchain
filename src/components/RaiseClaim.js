@@ -11,6 +11,7 @@ function RaiseClaim({ contract }) {
   const [claimId, setClaimId] = useState("CID" + uuidv4());
 
   const [documents, setDocuments] = useState("");
+  console.log("hi");
 
   const paid = "false";
 
