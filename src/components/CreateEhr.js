@@ -4,8 +4,7 @@ import Web3 from "web3"; // Import Web3 here
 import { useParams } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import "../big_css/CreateEHR.css";
-import { Web3Storage } from "web3.storage";
-import { render, fireEvent, waitFor } from "@testing-library/react";
+import axios from 'axios'; // Import axios here
 
 const CreateEhr = () => {
   const { address } = useParams(); // Retrieve account address from URL
@@ -25,34 +24,14 @@ const CreateEhr = () => {
   const [cid, setCid] = useState(null);
   const [retrievedFileURL, setRetrievedFileURL] = useState(null);
   const fileInputRef = React.useRef(null);
+  const JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiI5NjA2MzQ1Ni03MjgwLTQwMzMtYjNiZS0xYTY1ZjM4MzFmNzMiLCJlbWFpbCI6ImRldmVuLm1haGVzaDA0MTFAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsInBpbl9wb2xpY3kiOnsicmVnaW9ucyI6W3siaWQiOiJGUkExIiwiZGVzaXJlZFJlcGxpY2F0aW9uQ291bnQiOjF9LHsiaWQiOiJOWUMxIiwiZGVzaXJlZFJlcGxpY2F0aW9uQ291bnQiOjF9XSwidmVyc2lvbiI6MX0sIm1mYV9lbmFibGVkIjpmYWxzZSwic3RhdHVzIjoiQUNUSVZFIn0sImF1dGhlbnRpY2F0aW9uVHlwZSI6InNjb3BlZEtleSIsInNjb3BlZEtleUtleSI6IjkyY2RkMjI3NmU2YmRhZjhmMmVkIiwic2NvcGVkS2V5U2VjcmV0IjoiOTAwYTkxNjM0NzEyZTMwYTc2NDNmMGMwOWU4M2U0OWMxMTBmZDk5ZTA0ODY5YWY2NzRjM2YzN2Y1MTU3MzlkNiIsImlhdCI6MTcwNzgzNzcxNX0.E4j8q2xvq7pYj6vaugMcQrGxIJvJC3la5hQzTLQAfLo"
 
   useEffect(() => {
     connectToMetaMask();
   }, []);
 
-  const client = new Web3Storage({
-    token:
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDgyNDdFZDdiNGU5OWU2NGNjRUVGMjczOERBYzREQzNkRUM4YTJkZTAiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2OTgyMjg0OTIyMzQsIm5hbWUiOiJpcGZzX3Rlc3RpbmcifQ.fY8HvEANqxvUv56pGyUqVU1X7PDRLsV6FN22eamNlmo",
-  });
-
   const onFileChange = (event) => {
     setFile(event.target.files[0]);
-  };
-
-  const retrieveFromWeb3 = async () => {
-    if (!cid) return;
-
-    const retrieved = await client.get(cid);
-    if (!retrieved) {
-      console.error("Failed to retrieve file");
-      return;
-    }
-
-    const fileBlob = new Blob([await retrieved.arrayBuffer()], {
-      type: "application/pdf",
-    });
-    const fileURL = URL.createObjectURL(fileBlob);
-    setRetrievedFileURL(fileURL);
   };
 
   const connectToMetaMask = async () => {
@@ -91,11 +70,34 @@ const CreateEhr = () => {
         return;
       }
 
-      const cid = await client.put([file]);
-      setCid(cid);
-      alert("file uploaded successfully with " + cid);
+      // Pinata file upload
+      const newFormData = new FormData();
+      newFormData.append('file', file);
+      newFormData.append('pinataMetadata', JSON.stringify({
+        name: 'File name',
+      }));
+      newFormData.append('pinataOptions', JSON.stringify({
+        cidVersion: 0,
+      }));
+
+      const res = await axios.post("https://api.pinata.cloud/pinning/pinFileToIPFS", newFormData, {
+        maxBodyLength: "Infinity",
+        headers: {
+          'Content-Type': `multipart/form-data; boundary=${newFormData._boundary}`,
+          'Authorization': `Bearer ${JWT}` // Use your Pinata JWT token here
+        }
+      });
+
+      setCid(res.data.IpfsHash);
+      console.log(res.data.IpfsHash);
+      alert("file uploaded successfully with " + res.data.IpfsHash);
+      console.log(cid);
+      console.log(formData.doctorPrivateKey);
+
+
+      // Remaining code for EHR creation
       const temp_docSignature = web3Instance.eth.accounts.sign(
-        cid,
+        res.data.IpfsHash,
         formData.doctorPrivateKey
       );
 
@@ -116,7 +118,7 @@ const CreateEhr = () => {
           formData.gender,
           formData.diagnosis,
           formData.prescription,
-          cid,
+          res.data.IpfsHash,
           docSignature
         )
         .send({ from: formData.patientAddress });
